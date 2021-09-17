@@ -8,7 +8,7 @@ public:
 	cApp();
 	~cApp();
 };
-enum
+enum WINDOWIDS
 {
 	ID_Hello = 1
 };

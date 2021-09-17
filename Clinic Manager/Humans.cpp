@@ -90,19 +90,19 @@ void Human::CalculateFiscalInfoSum()
 
 void Human::DelPhone(const std::string& Phone) 
 {
-	phoneNumbers->remove(Phone);
+	//phoneNumbers->remove(Phone);
 	delete &Phone;
 }
 
 void Human::DelOnlineContact(const std::string& contact) 
 {
-	onlineContacts->remove(contact);
+	//onlineContacts->remove(contact);
 	delete& contact;
 }
 
 void Human::DelFiscalInfoDetail(const FinancialRecord& record) 
 {
-	fiscalInfoDetails->remove(record);
+	//fiscalInfoDetails->remove(record);
 	delete& record;
 }
 
@@ -141,7 +141,7 @@ FinancialRecord::FinancialRecord(float value, bool Fulfilled)
 }
 
 
-
+/*
 PetOwner::PetOwner(const std::string& name, const std::string& number, const std::string&  contact,const bool& useDetail,const FinancialRecord& record, Pet& pet):Human(name,number,contact,useDetail,record)
 {
 	AddPet(pet);
@@ -173,8 +173,8 @@ void PetOwner::AddCoOwner(PetOwner& other)
 
 void PetOwner::DelCoOwner(PetOwner& other) 
 {
-	other.CoOwners->remove(*this);
-	this->CoOwners->remove(other);
+	//other.CoOwners->remove(*this);
+	//this->CoOwners->remove(other);
 	other.Pets = new std::list<Pet&>();
 }
 
@@ -190,10 +190,10 @@ void PetOwner::AddPet(Pet& newPet)
 
 void PetOwner::DelPet(Pet& removedPet)
 {
-	Pets->remove(removedPet);
+	//Pets->remove(removedPet);
 }
 
 const std::list<Pet&>* PetOwner::getPets()
 {
 	return Pets;
-}
+}*/

@@ -28,9 +28,6 @@ public:
 	const std::list<std::string>*  GetPhone();
 	const std::list<std::string>* GetOnlineContacts();
 	const std::list<FinancialRecord>* getFinancialDetails();
-	void DelOnlineContact(const std::string&);
-	void SetFiscalInfoDetail(const FinancialRecord&);
-	void DelFiscalInfoDetail(const FinancialRecord&);
 private:
 	void CalculateFiscalInfoSum();
 private:
@@ -42,7 +39,7 @@ private:
 	bool useFiscalInfoDetails;
 	std::list <FinancialRecord>* fiscalInfoDetails;
 };
-
+/*
 class PetOwner : public Human 
 {
 public:
@@ -61,3 +58,4 @@ private:
 	std::list<Pet&>* Pets;
 	std::list<PetOwner&>* CoOwners;
 };
+*/
