@@ -1,4 +1,20 @@
 #include "Humans.h"
+#include <iterator>
+
+
+template <class T>
+T getListItem(std::list<T> List, int Index) 
+{
+	if (Index < List.size()) 
+	{
+		typename std::list<T>::iterator current = List.begin();
+		for (int i = 0; i < Index; i++) current++;
+		return *current;
+	}
+	return -1212121212;
+}
+
+
 
 Human::Human() 
 {
@@ -90,19 +106,19 @@ void Human::CalculateFiscalInfoSum()
 
 void Human::DelPhone(const std::string& Phone) 
 {
-	//phoneNumbers->remove(Phone);
+	phoneNumbers->remove(Phone);
 	delete &Phone;
 }
 
 void Human::DelOnlineContact(const std::string& contact) 
 {
-	//onlineContacts->remove(contact);
+	onlineContacts->remove(contact);
 	delete& contact;
 }
 
 void Human::DelFiscalInfoDetail(const FinancialRecord& record) 
 {
-	//fiscalInfoDetails->remove(record);
+	fiscalInfoDetails->remove(record);
 	delete& record;
 }
 
@@ -126,6 +142,11 @@ const std::list<FinancialRecord>* Human::getFinancialDetails()
 	return fiscalInfoDetails;
 }
 
+bool Human::operator== (const Human& H)const 
+{
+	return(this->name==H.name&&*(this->phoneNumbers->begin())==*(H.phoneNumbers->begin())&& *(this->onlineContacts->begin()) == *(H.onlineContacts->begin()));
+}
+
 
 
 FinancialRecord::FinancialRecord() 
@@ -140,60 +161,71 @@ FinancialRecord::FinancialRecord(float value, bool Fulfilled)
 	fulfilled = Fulfilled;
 }
 
+bool FinancialRecord::operator==(const FinancialRecord& a)const 
+{
+	return (a.fiscalinfo == this->fiscalinfo && a.fulfilled == this->fulfilled);
+}
 
-/*
+
+
 PetOwner::PetOwner(const std::string& name, const std::string& number, const std::string&  contact,const bool& useDetail,const FinancialRecord& record, Pet& pet):Human(name,number,contact,useDetail,record)
 {
 	AddPet(pet);
-	CoOwners = new std::list<PetOwner&>();
+	CoOwners = new std::list<PetOwner*>();
 }
 
 PetOwner::PetOwner() : Human() 
 {
-	Pets = new std::list<Pet&>();
+	Pets = new std::list<Pet*>();
 	Pet pet=Pet();
 	AddPet(pet);
-	CoOwners = new std::list<PetOwner&>();
+	CoOwners = new std::list<PetOwner*>();
 }
 
 PetOwner::PetOwner(const PetOwner& Other):Human(Other)
 {
-	for(Pet p:*(Other.Pets))
-		AddPet(p);
-	for(PetOwner co:*(Other.CoOwners))
-		AddCoOwner(co);
+	for (Pet* p : *(Other.Pets))
+		AddPet(*p);
+	for (PetOwner* co : *(Other.CoOwners))
+		AddCoOwner(*co);
 }
 
 void PetOwner::AddCoOwner(PetOwner& other) 
 {
-	other.CoOwners->push_back(*this);
-	this->CoOwners->push_back(other);
+	other.CoOwners->push_back(this);
+	this->CoOwners->push_back(&other);
 	other.Pets = this->Pets;
 }
 
 void PetOwner::DelCoOwner(PetOwner& other) 
 {
-	//other.CoOwners->remove(*this);
-	//this->CoOwners->remove(other);
-	other.Pets = new std::list<Pet&>();
+	other.CoOwners->remove(this);
+	this->CoOwners->remove(&other);
+	other.Pets = new std::list<Pet*>();
 }
 
-const std::list<PetOwner&>* PetOwner::getCoOwners() 
+const std::list<PetOwner*>* PetOwner::getCoOwners() 
 {
 	return CoOwners;
 }
 
 void PetOwner::AddPet(Pet& newPet)
 {
-	Pets->push_back(newPet);
+	Pets->push_back(&newPet);
 }
 
 void PetOwner::DelPet(Pet& removedPet)
 {
-	//Pets->remove(removedPet);
+	Pets->remove(&removedPet);
 }
 
-const std::list<Pet&>* PetOwner::getPets()
+const std::list<Pet*>* PetOwner::getPets()
 {
 	return Pets;
-}*/
+}
+
+bool PetOwner::operator== (const PetOwner& p1) const 
+{
+	Human h1 = p1,h2=*this;
+	return h1==h2;
+}

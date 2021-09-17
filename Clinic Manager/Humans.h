@@ -2,12 +2,16 @@
 #include <string>
 #include<list>
 #include "Pet.h"
+
+template <class T>
+T getListItem(std::list<T>, int);
 class FinancialRecord {
 public:
 	FinancialRecord();
 	FinancialRecord(float, bool);
 	float fiscalinfo;
 	bool fulfilled;
+	bool operator==(const FinancialRecord& a) const;
 };
 
 class Human
@@ -28,6 +32,7 @@ public:
 	const std::list<std::string>*  GetPhone();
 	const std::list<std::string>* GetOnlineContacts();
 	const std::list<FinancialRecord>* getFinancialDetails();
+	bool operator== (const Human& H)const;
 private:
 	void CalculateFiscalInfoSum();
 private:
@@ -39,7 +44,7 @@ private:
 	bool useFiscalInfoDetails;
 	std::list <FinancialRecord>* fiscalInfoDetails;
 };
-/*
+
 class PetOwner : public Human 
 {
 public:
@@ -49,13 +54,12 @@ public:
 public:
 	void AddCoOwner(PetOwner&);
 	void DelCoOwner(PetOwner&);
-	const std::list<PetOwner&>* getCoOwners();
+	const std::list<PetOwner*>* getCoOwners();
 	void AddPet(Pet&);
 	void DelPet(Pet&);
-	const std::list<Pet&>* getPets();
-
+	const std::list<Pet*>* getPets();
+	bool operator== (const PetOwner& p1) const;
 private:
-	std::list<Pet&>* Pets;
-	std::list<PetOwner&>* CoOwners;
+	std::list<Pet*>* Pets;
+	std::list<PetOwner*>* CoOwners;
 };
-*/
